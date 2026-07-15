@@ -71,11 +71,61 @@ fi
 export LS_COLORS="di=1;33:fi=0;37:ln=1:or=5;31:mi=41;37:ex=1;92:*.c=0;36:*.cpp=0;36:*.py=0;32"
 
 alias ls='ls --color=auto --group-directories-first -v'
+<<<<<<< HEAD
 alias vim='neovim'
 alias emacs ='emacs -nw'
+=======
+#alias vim='nvim'
+#alias emacs='emacs -nw'
+alias python ='python3'
+>>>>>>> 56fc345 (July Update)
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+<<<<<<< HEAD
 echo "Did you know that:"; whatis $(ls /bin | shuf -n 1 )
+=======
+# Auto-glitch screen saver on terminal idle
+# Set idle timeout in seconds (e.g., 180 seconds = 3 minutes)
+#export TMOUT=180
+
+#auto_glitch_screensaver() {
+#    # Check if the terminal is interactive and the glitch script exists
+#    if [[ -x "$HOME/Obsidian_vault/_bin/glitch.sh" ]]; then
+#        # Launch the glitch script
+#        "$HOME/Obsidian_vault/_bin/glitch.sh"
+#        
+#        # Once Ctrl+C exits the glitch script, restart a new Bash session 
+#        # so the terminal window stays open and resets the idle timer
+#        exec bash
+#    fi
+#}
+
+# Trap the exit signal caused by the TMOUT variable timing out
+#trap auto_glitch_screensaver EXIT
+
+
+# Skip Commands when VSCode is detected!
+if [ -z "$VSCODE_PID" ]; then
+   # Add heavy commands here
+   echo "Did you know that:"; whatis $(ls /bin | shuf -n 1 )
+   . "$HOME/.local/bin/env"
+fi
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/home/kumar/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/kumar/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/kumar/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/kumar/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+
