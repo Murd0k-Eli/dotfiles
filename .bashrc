@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-
-# Bash Confguration File
-
+# Bash Confguration File v0.01
+#---------------------------
+#           PCT
+#---------------------------
 # Note that a variable may require special treatment
 # if it will be exported.
-
 #\e is a special character denoting the start of a color sequence
 #\u indicates the name of the user, followed by the '@' symbol
 #\h showcases the system's hostname
@@ -61,6 +61,9 @@ PS1="$LIGHTBLUE\\u@\\h:$LIGHTRED\\w$NC$ "
 #('\$PCT'\u$DARKGRAY)-('\$PCT'\!$DARKGRAY)$YELLOW-> $NC'\`"
 #The trick is to use strong quoting for parts of old PS1 variable.
 
+#---------------------------
+#          TMUX
+#---------------------------
 
 # Launch Default Tmux Session on Terminal Launch
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
@@ -79,7 +82,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-echo "Did you know that:"; whatis $(ls /bin | shuf -n 1 )
+#------------------------------------
+#              FUNCTIONS
+#------------------------------------
+dyk(){
+    echo "Did you know that:"; whatis $(ls /bin | shuf -n 1 )
+}
 # Auto-glitch screen saver on terminal idle
 # Set idle timeout in seconds (e.g., 180 seconds = 3 minutes)
 #export TMOUT=180
@@ -104,19 +112,27 @@ if [ -z "$VSCODE_PID" ]; then
    . "$HOME/.local/bin/env"
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/kumar/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/kumar/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/kumar/anaconda3/etc/profile.d/conda.sh"
+conda_init(){
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/kumar/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/home/kumar/anaconda3/bin:$PATH"
+        if [ -f "/home/kumar/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/kumar/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/kumar/anaconda3/bin:$PATH"
+        fi
     fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+    unset __conda_setup
+    # <<< conda initialize <<<
+    export PATH=~/anaconda3/bin:$PATH
+}
 
-export PATH=~/anaconda3/bin:$PATH
+lazyupdate() {
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt autoremove -y
+    echo "System is fully updated and cleaned!"                   
+}
