@@ -136,3 +136,20 @@ lazyupdate() {
     sudo apt autoremove -y
     echo "System is fully updated and cleaned!"                   
 }
+
+
+#--------------------------------
+#           ALIAS
+#--------------------------------
+
+alias ls='ls --color=auto --group-directories-first -v'
+#alias vim='nvim'
+#alias emacs='emacs -nw'
+alias python='python3'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+ alias data="cd ~/Media/Obsidian_Vault/_manDB/"
+ alias obsidian="cd ~/Media/Obsidian_Vault/"
