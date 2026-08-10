@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # Bash Confguration File v0.01
+# Author : Kumar
+
 #---------------------------
 #           PCT
 #---------------------------
@@ -73,11 +75,6 @@ fi
 
 export LS_COLORS="di=1;33:fi=0;37:ln=1:or=5;31:mi=41;37:ex=1;92:*.c=0;36:*.cpp=0;36:*.py=0;32"
 
-alias ls='ls --color=auto --group-directories-first -v'
-#alias vim='nvim'
-#alias emacs='emacs -nw'
-alias python='python3'
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -112,8 +109,7 @@ if [ -z "$VSCODE_PID" ]; then
    . "$HOME/.local/bin/env"
 fi
 
-conda_init(){
-    # >>> conda initialize >>>
+conda_init() {
     # !! Contents within this block are managed by 'conda init' !!
     __conda_setup="$('/home/kumar/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
     if [ $? -eq 0 ]; then
@@ -126,8 +122,6 @@ conda_init(){
         fi
     fi
     unset __conda_setup
-    # <<< conda initialize <<<
-    export PATH=~/anaconda3/bin:$PATH
 }
 
 lazyupdate() {
@@ -151,5 +145,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
- alias data="cd ~/Media/Obsidian_Vault/_manDB/"
- alias obsidian="cd ~/Media/Obsidian_Vault/"
+alias manDB="cd ~/Media/Obsidian-Vault/_bin/_manDB/"
+alias obsidian="cd ~/Media/Obsidian-Vault/"
+alias condact="source ~/anaconda3/bin/activate"
+alias condeact="conda deactivate"
+alias alpine="docker attach alpine-virtual"
+alias sbash="source ~/.bashrc"
+#---------------------------------
+#               PATHS
+#---------------------------------
+export PATH="~/anaconda3/bin:$PATH"
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
+# The -d flag checks if the directory actually exists
+if [ -d "$JAVA_HOME" ]; then
+    export PATH="$PATH:$JAVA_HOME/bin"
+else
+    echo "Java Path Enviornment not found!"
+fi
