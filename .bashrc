@@ -132,6 +132,44 @@ lazyupdate() {
 }
 
 
+alpine() {
+    local container_name="alpine-virtual"
+    # Check if the container exists
+    if ! docker ps -a --format '{{.Names}}' | grep -Eq "^${container_name}$"; then
+        echo "Error: Container '${container_name}' does not exist."
+        return 1
+    fi
+    # Check if the container is currently running
+    if docker ps --format '{{.Names}}' | grep -Eq "^${container_name}$"; then
+        echo "Container '${container_name}' is already running."
+        echo "Choose an option:"
+        echo "1) Start a new session (exec into container)"
+        echo "2) End the present one (stop container)"
+        read -rp "Enter choice [1-2]: " choice
+
+        case "$choice" in
+            1)
+                echo "Opening a new session..."
+                docker exec -it "${container_name}" sh
+                ;;
+            2)
+                echo "Stopping container..."
+                docker stop "${container_name}"
+                ;;
+            *)
+                echo "Invalid choice. Exiting."
+                return 1
+                ;;
+        esac
+    else
+        echo "Container '${container_name}' is stopped. Starting and attaching..."
+        docker start "${container_name}"
+        docker attach "${container_name}"
+    fi                                                                                 
+}
+
+
+
 #--------------------------------
 #           ALIAS
 #--------------------------------
@@ -145,11 +183,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-alias manDB="cd ~/Media/Obsidian-Vault/_bin/_manDB/"
+alias DB="cd ~/Media/Obsidian-Vault/_bin/_manDB/"
 alias obsidian="cd ~/Media/Obsidian-Vault/"
 alias condact="source ~/anaconda3/bin/activate"
 alias condeact="conda deactivate"
-alias alpine="docker attach alpine-virtual"
+#alias alpine="docker attach alpine-virtual"
 alias sbash="source ~/.bashrc"
 #---------------------------------
 #               PATHS
@@ -162,3 +200,5 @@ if [ -d "$JAVA_HOME" ]; then
 else
     echo "Java Path Enviornment not found!"
 fi
+export HERMES_ENABLE_PROJECT_PLUGINS=true
+
