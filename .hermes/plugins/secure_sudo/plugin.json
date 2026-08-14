@@ -1,0 +1,25 @@
+{
+  "id": "secure_sudo",
+  "name": "Secure Sudo Exec",
+  "version": "1.0.0",
+  "description": "Executes elevated root-level bash commands securely.",
+  "author": "User",
+  "type": "native",
+  "commands": [
+    {
+      "name": "secure_sudo_run",
+      "description": "Executes an elevated command by prompting for a transient password, immediately executing it, and purging the credential validation runtime lifetime.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string",
+            "description": "The complete terminal command to execute as root (e.g., 'apt update')."
+          }
+        },
+        "required": ["command"]
+      }
+    }
+  ]
+}
+

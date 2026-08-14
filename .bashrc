@@ -168,8 +168,6 @@ alpine() {
     fi                                                                                 
 }
 
-
-
 #--------------------------------
 #           ALIAS
 #--------------------------------
@@ -189,6 +187,8 @@ alias condact="source ~/anaconda3/bin/activate"
 alias condeact="conda deactivate"
 #alias alpine="docker attach alpine-virtual"
 alias sbash="source ~/.bashrc"
+alias windows="/home/kumar/Apps/Windows/win-toggle.sh"
+
 #---------------------------------
 #               PATHS
 #---------------------------------

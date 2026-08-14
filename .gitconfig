@@ -1,0 +1,9 @@
+[user]
+	name = Kumar
+	email = kumar@git.com
+[init]
+	defaultBranch = main
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
