@@ -2,7 +2,7 @@
 # Configuration Variables
 CONTAINER_NAME="windows"
 RDP_USER="Docker"
-RDP_PASS="mythical"
+RDP_PASS="StrongPassword123!"
 RDP_PORT="3389"
 
 launch_rdp() {
@@ -92,7 +92,7 @@ fi
 # 3. Wait for the Windows RDP network service to come online
 echo "⏳ Waiting for Windows RDP port to respond (this takes a moment)..."
 while ! nc -z localhost "$RDP_PORT" 2>/dev/null; do
-    sleep 2
+    sleep 120
 done
 echo "⏳ Port detected open. Stabilising connection handshake..."
 sleep 12

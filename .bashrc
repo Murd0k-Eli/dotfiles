@@ -72,7 +72,6 @@ if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
     tmux attach-session -t default || tmux new-session -s default
 fi
 
-
 export LS_COLORS="di=1;33:fi=0;37:ln=1:or=5;31:mi=41;37:ex=1;92:*.c=0;36:*.cpp=0;36:*.py=0;32"
 
 export NVM_DIR="$HOME/.nvm"
@@ -130,7 +129,6 @@ lazyupdate() {
     sudo apt autoremove -y
     echo "System is fully updated and cleaned!"                   
 }
-
 
 alpine() {
     local container_name="alpine-virtual"
