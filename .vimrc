@@ -59,7 +59,7 @@ call plug#begin()
     "Plug 'preservim/vim-markdown'
     "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}"
     Plug 'junegunn/limelight.vim'
-    Plug 'junegunn/goyo.vim'
+    "Plug 'junegunn/goyo.vim'
     "Plug 'airblade/vim-gitgutter'"
     "Plug 'vim-airline/vim-airline'
     Plug 'preservim/nerdtree'
@@ -75,6 +75,7 @@ call plug#begin()
     Plug 'jiangmiao/auto-pairs'
     "Plug 'junegunn/goyo.vim'
     "Plug 'airblade/vim-gitgutter'
+    Plug 'madox2/vim-ai'
     call plug#end()
 
 
@@ -242,3 +243,11 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 "let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+
+let g:vim_ai_chat = {
+\  "options": {
+\    "endpoint_url": "http://localhost:11434/v1/chat/completions",
+\    "model": "llama3",
+\  },
+\}
