@@ -163,15 +163,21 @@ onboarding:
   seen:
     openclaw_residue_cleanup: true
     tool_progress_prompt: true
+# =============================================================================
+# Hermes Plugins Configuration
+# =============================================================================
+#
 plugins:
   enabled:
+    - herdr-agent-state   # Enables the live socket lifecycle tracking hooks with Herdr
     - secure_sudo
+
 platform_toolsets:
   cli:
     - hermes-cli
 #cli: '[''clarify'', ''code_execution'', ''computer_use'', ''context_engine'', ''cronjob'',
-    ''file'', ''memory'', ''session_search'', ''skills'', ''spotify'', ''terminal'',
-    ''todo'', ''secure_sudo'']'
+#    ''file'', ''memory'', ''session_search'', ''skills'', ''spotify'', ''terminal'',
+#    ''todo'', ''secure_sudo'']'
   discord:
     - hermes-discord
   google_chat:
@@ -210,8 +216,34 @@ session_reset:
   at_hour: 4
   idle_minutes: 1440
   mode: none
+
+
+# =============================================================================
+# Herdr Skill Configuration
+# =============================================================================
+#
 skills:
   creation_nudge_interval: 15
+  config:
+        herdr:
+        # Set the active coding worker backend ('claude', 'codex', or 'opencode')
+        default_worker: "ollama"
+        # Path to the Herdr local socket API communication directory
+        socket_dir: "~/.hermes"
+        # Fallback UI/Screen manifest matching mode if hooks fail
+        screen_matching: true
+        # Coding workers specific setups
+        workers:
+          ollama:
+            command: "ollama run"
+            model_name: "gemma4:31b-cloud"
+            api_base: "http://127.0.0.1:11434" # Default local Ollama endpoint
+          claude:
+            command: "claude-code"
+            config_dir: "~/.claude"
+          codex:
+            command: "codex"
+            config_dir: "~/.codex"
 streaming:
   enabled: false
 stt:
