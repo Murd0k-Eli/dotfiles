@@ -203,3 +203,16 @@ export HERMES_ENABLE_PROJECT_PLUGINS=true
 
 export ASTRA_DB_API_ENDPOINT="YOUR_API_ENDPOINT"
 export ASTRA_DB_APPLICATION_TOKEN="YOUR_TOKEN"
+
+
+
+# =============================================================================
+# # Hermes + Herdr + Ollama Mesh Status Monitoring
+# # =============================================================================
+#
+# # Comprehensive health check for the entire agent mesh
+alias hermes-check='echo "=== Checking Ollama Service ===" && curl -s http://127.0.0 | grep -q "gemma4:31b-cloud" && echo "✅ Ollama: Online & gemma4:31b-cloud found" || echo "❌ Ollama: Offline or model missing" && echo "=== Checking Herdr Socket ===" && [ -S ~/.hermes/herdr.sock  ] && echo "✅ Herdr Socket: Active" || echo "⚠️ Herdr Socket: Not found (Start Hermes first)" && echo "=== Checking Hermes Config ===" && hermes config show | grep -E "herdr|ollama" && echo "✅ Hermes Config: Parsed"'
+#
+# # Quick restart shortcut to apply YAML modifications instantly
+alias hermes-reload='hermes config show && echo "🔄 Reloading agent context..." && herdr integration install hermes'
+#
