@@ -24,8 +24,7 @@ YELLOW='\[\e[1;33m\]'
 LIGHTBLUE='\[\e[1;34m\]'
 NC='\[\e[m\]'
 
-PCT="\`if [[ \$EUID -eq 0 ]]; then T='$LIGHTRED' ; else T='$LIGHTBLUE'; fi; 
-echo \$T \`"
+PCT="$(if [[ \$EUID -eq 0 ]]; then echo "$LIGHTRED"; else echo "$LIGHTBLUE"; fi)"
 
 #  For "literal" command substitution to be assigned to a variable,
 #+ use escapes and double quotes:
@@ -190,7 +189,7 @@ alias windows="/home/kumar/Apps/Windows/win-toggle.sh"
 #---------------------------------
 #               PATHS
 #---------------------------------
-export PATH="~/anaconda3/bin:$PATH"
+export PATH="$HOME/anaconda3/bin:$PATH"
 export JAVA_HOME="/usr/lib/jvm/java-21-openjdk-amd64"
 # The -d flag checks if the directory actually exists
 if [ -d "$JAVA_HOME" ]; then
@@ -210,7 +209,7 @@ export ASTRA_DB_APPLICATION_TOKEN="YOUR_TOKEN"
 # Hermes + Herdr + Ollama Mesh Status Monitoring
 # =============================================================================
 # Comprehensive health check for the entire agent mesh
-alias hermes-check='echo "=== Checking Ollama Service ===" && curl -s http://127.0.0 | grep -q "gemma4:31b-cloud" && echo "✅ Ollama: Online & gemma4:31b-cloud found" || echo "❌ Ollama: Offline or model missing" && echo "=== Checking Herdr Socket ===" && [ -S ~/.hermes/herdr.sock  ] && echo "✅ Herdr Socket: Active" || echo "⚠️ Herdr Socket: Not found (Start Hermes first)" && echo "=== Checking Hermes Config ===" && hermes config show | grep -E "herdr|ollama" && echo "✅ Hermes Config: Parsed"'
+alias hermes-check='echo "=== Checking Ollama Service ===" && curl -s http://127.0.0.1:11434 | grep -q "gemma4:31b-cloud" && echo "✅ Ollama: Online & gemma4:31b-cloud found" || echo "❌ Ollama: Offline or model missing" && echo "=== Checking Herdr Socket ===" && [ -S ~/.hermes/herdr.sock  ] && echo "✅ Herdr Socket: Active" || echo "⚠️ Herdr Socket: Not found (Start Hermes first)" && echo "=== Checking Hermes Config ===" && hermes config show | grep -E "herdr|ollama" && echo "✅ Hermes Config: Parsed"'
 # Quick restart shortcut to apply YAML modifications instantly
 alias hermes-reload='hermes config show && echo "🔄 Reloading agent context..." && herdr integration install hermes'
 
