@@ -207,12 +207,30 @@ export ASTRA_DB_APPLICATION_TOKEN="YOUR_TOKEN"
 
 
 # =============================================================================
-# # Hermes + Herdr + Ollama Mesh Status Monitoring
-# # =============================================================================
-#
-# # Comprehensive health check for the entire agent mesh
+# Hermes + Herdr + Ollama Mesh Status Monitoring
+# =============================================================================
+# Comprehensive health check for the entire agent mesh
 alias hermes-check='echo "=== Checking Ollama Service ===" && curl -s http://127.0.0 | grep -q "gemma4:31b-cloud" && echo "✅ Ollama: Online & gemma4:31b-cloud found" || echo "❌ Ollama: Offline or model missing" && echo "=== Checking Herdr Socket ===" && [ -S ~/.hermes/herdr.sock  ] && echo "✅ Herdr Socket: Active" || echo "⚠️ Herdr Socket: Not found (Start Hermes first)" && echo "=== Checking Hermes Config ===" && hermes config show | grep -E "herdr|ollama" && echo "✅ Hermes Config: Parsed"'
-#
-# # Quick restart shortcut to apply YAML modifications instantly
+# Quick restart shortcut to apply YAML modifications instantly
 alias hermes-reload='hermes config show && echo "🔄 Reloading agent context..." && herdr integration install hermes'
-#
+
+
+# =============================================================================
+# Automated Herdr Agent Launch Sequence
+# =============================================================================
+if ! pgrep -x "herdr" > /dev/null; then
+    echo "🤖 Launching Herdr orchestrator background service..."
+    # Starts Herdr in background mode, routing logs safely away from your clean shell
+    herdr start --daemon > /dev/null 2>&1 &
+fi
+
+# =============================================================================
+# Automated TMUX Workspace Launch (Hermes + Herdr + Ollama)
+# =============================================================================
+# Only trigger if TMUX is installed, we are NOT already inside a tmux session, and the session is completely interactive.
+if command -v tmux >/dev/null 2>&1 && [ -z "$TMUX"  ] && [ "$TERM" != "screen"  ]; then
+    # Ensure our local bin directory is on the system path
+    export PATH="$HOME/Media/Obsidian-Vault/_bin:$PATH"          
+    # Execute the layout automator script instantly
+    exec hermes-workspace.sh
+fi
