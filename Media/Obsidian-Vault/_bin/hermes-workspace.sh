@@ -15,7 +15,7 @@ if [ $? != 0  ]; then
     # 4. Populate Pane 0 (Top Main): Prepare for Hermes Agent or Code Editor
     tmux send-keys -t $SESSION_NAME:0.0 "clear && echo '🔮 MAIN WORKSPACE - Ready for Hermes Agent'" C-m
     # 5. Populate Pane 1 (Bottom Left): Ensure Ollama server daemon is active
-    tmux send-keys -t $SESSION_NAME:0.1 "ollama serve" C-m
+    tmux send-keys -t $SESSION_NAME:0.1 "pgrep ollama > /dev/null || ollama serve" C-m
     # 6. Populate Pane 2 (Bottom Right): Launch Herdr foreground supervisor
     tmux send-keys -t $SESSION_NAME:0.2 "sleep 2 && herdr start" C-m
     # Select the top main pane as the active window focus

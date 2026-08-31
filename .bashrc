@@ -66,16 +66,9 @@ PS1="$LIGHTBLUE\\u@\\h:$LIGHTRED\\w$NC$ "
 #          TMUX
 #---------------------------
 
-# Launch Default Tmux Session on Terminal Launch
-if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-    tmux attach-session -t default || tmux new-session -s default
-fi
 
 export LS_COLORS="di=1;33:fi=0;37:ln=1:or=5;31:mi=41;37:ex=1;92:*.c=0;36:*.cpp=0;36:*.py=0;32"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #------------------------------------
 #              FUNCTIONS
@@ -174,9 +167,6 @@ alias ls='ls --color=auto --group-directories-first -v'
 #alias emacs='emacs -nw'
 alias python='python3'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 alias DB="cd ~/Media/Obsidian-Vault/_bin/_manDB/"
 alias obsidian="cd ~/Media/Obsidian-Vault/"
@@ -212,16 +202,6 @@ export ASTRA_DB_APPLICATION_TOKEN="YOUR_TOKEN"
 alias hermes-check='echo "=== Checking Ollama Service ===" && curl -s http://127.0.0.1:11434 | grep -q "gemma4:31b-cloud" && echo "✅ Ollama: Online & gemma4:31b-cloud found" || echo "❌ Ollama: Offline or model missing" && echo "=== Checking Herdr Socket ===" && [ -S ~/.hermes/herdr.sock  ] && echo "✅ Herdr Socket: Active" || echo "⚠️ Herdr Socket: Not found (Start Hermes first)" && echo "=== Checking Hermes Config ===" && hermes config show | grep -E "herdr|ollama" && echo "✅ Hermes Config: Parsed"'
 # Quick restart shortcut to apply YAML modifications instantly
 alias hermes-reload='hermes config show && echo "🔄 Reloading agent context..." && herdr integration install hermes'
-
-
-# =============================================================================
-# Automated Herdr Agent Launch Sequence
-# =============================================================================
-if ! pgrep -x "herdr" > /dev/null; then
-    echo "🤖 Launching Herdr orchestrator background service..."
-    # Starts Herdr in background mode, routing logs safely away from your clean shell
-    herdr start --daemon > /dev/null 2>&1 &
-fi
 
 # =============================================================================
 # Automated TMUX Workspace Launch (Hermes + Herdr + Ollama)
